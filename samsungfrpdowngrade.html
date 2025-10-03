@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samsung FRP Bypass - Android 15 to 14 Downgrade</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --secondary: #00a9e0;
+            --accent: #ff6b00;
+            --dark: #0a0f3d;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .instructions {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .step {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .step-title {
+            display: inline-block;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .step-content {
+            margin-top: 10px;
+            padding-left: 40px;
+        }
+        
+        .step-image {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            background: rgba(0,0,0,0.5);
+            border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .step-image i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .warning {
+            background: rgba(255,107,0,0.2);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning i {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+        
+        .download-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .download-link {
+            background: rgba(0,169,224,0.2);
+            border: 1px solid var(--secondary);
+            border-radius: 5px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--light);
+            transition: all 0.3s ease;
+        }
+        
+        .download-link:hover {
+            background: rgba(0,169,224,0.4);
+            transform: translateY(-2px);
+        }
+        
+        .download-link i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .video-guide {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .video-guide h2 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .video-placeholder {
+            width: 100%;
+            max-width: 600px;
+            height: 340px;
+            background: rgba(0,0,0,0.5);
+            border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 10px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .video-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .step-content {
+                padding-left: 0;
+            }
+            
+            .step-image, .video-placeholder {
+                height: 200px;
+            }
+            
+            .video-placeholder i {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiByeD0iOCIgZmlsbD0iIzAwQTlFMiIvPgo8cGF0aCBkPSJNMTUgMTVIMzBWNDVIMTVWMTVaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMzUgMTVINDVWNDVIMzVWMTVaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMjAgMjBIMjVWMjBIMjBWMjBaIiBmaWxsPSIjMTQyOEEwIi8+CjxwYXRoIGQ9Ik0yMCAyNUgyNVYzMEgyMFYyNVoiIGZpbGw9IiMxNDI4QTAiLz4KPHBhdGggZD0iTTIwIDM1SDI1VjQwSDIwVjM1WiIgZmlsbD0iIzE0MjhBMCIvPgo8cGF0aCBkPSJNMzAgMjBIMzVWMjBIMzBWMjBaIiBmaWxsPSIjMTQyOEEwIi8+CjxwYXRoIGQ9Ik0zMCAyNUgzNVYzMEgzMFYyNVoiIGZpbGw9IiMxNDI4QTAiLz4KPHBhdGggZD0iTTMwIDM1SDM1VjQwSDMwVjM1WiIgZmlsbD0iIzE0MjhBMCIvPgo8L3N2Zz4K" alt="Shadow Global Unlocker" class="logo-img">
+                <div class="logo-text">Shadow Global Unlocker</div>
+            </div>
+            <h1>Follow the instructions below to downgrade from Android 15 to 14</h1>
+            <div class="subtitle">Samsung FRP Bypass Guide</div>
+        </header>
+        
+        <div class="video-guide">
+            <h2><i class="fas fa-video"></i> Video Guide</h2>
+            <div class="video-placeholder">
+                <i class="fas fa-play-circle"></i>
+                <p>Full Video Tutorial - Downgrade Android 15 to 14</p>
+                <p style="font-size: 0.9rem; margin-top: 10px;">Replace with your YouTube/Vimeo embed code</p>
+            </div>
+            <p style="margin-top: 15px; opacity: 0.8;">Watch the complete step-by-step video tutorial</p>
+        </div>
+        
+        <div class="instructions">
+            <div class="warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Warning:</strong> This process will erase all data on your device. Backup important files before proceeding.
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">1</span>
+                    <span class="step-title">Enter Download Mode</span>
+                </div>
+                <div class="step-content">
+                    <p>First turn off your phone and put it to download mode by insert charge cable connected to pc while holding both volumes.</p>
+                    <p>Then click volume + to enter download mode.</p>
+                    <div class="step-image">
+                        <i class="fas fa-mobile-alt"></i>
+                        <p>Image: Download Mode Screen</p>
+                        <p style="font-size: 0.8rem;">Replace with actual image URL</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">2</span>
+                    <span class="step-title">Check Binary Version</span>
+                </div>
+                <div class="step-content">
+                    <p>Read the binary version and make sure its either U3 or S3, not above.</p>
+                    <p>If binary is higher than U3/S3, this method may not work.</p>
+                    <div class="step-image">
+                        <i class="fas fa-list-ol"></i>
+                        <p>Image: Binary Version Screen</p>
+                        <p style="font-size: 0.8rem;">Replace with actual image URL</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">3</span>
+                    <span class="step-title">Download Android 14 Firmware</span>
+                </div>
+                <div class="step-content">
+                    <p>Visit samfw.com and download the U3 Android 14 firmware for your device model.</p>
+                    <div class="download-links">
+                        <a href="https://samfw.com" class="download-link" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Visit samfw.com
+                        </a>
+                    </div>
+                    <div class="step-image">
+                        <i class="fas fa-download"></i>
+                        <p>Image: samfw.com Website</p>
+                        <p style="font-size: 0.8rem;">Replace with actual image URL</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">4</span>
+                    <span class="step-title">Download Odin Tool</span>
+                </div>
+                <div class="step-content">
+                    <p>Download Odin from our website and open it.</p>
+                    <div class="download-links">
+                        <a href="#" class="download-link">
+                            <i class="fas fa-download"></i> Download Odin3 v3.14.4
+                        </a>
+                    </div>
+                    <div class="step-image">
+                        <i class="fas fa-tools"></i>
+                        <p>Image: Odin Software Interface</p>
+                        <p style="font-size: 0.8rem;">Replace with actual image URL</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">5</span>
+                    <span class="step-title">Load Firmware in Odin</span>
+                </div>
+                <div class="step-content">
+                    <p>Extract the firmware and open the AP, BL, CP and CSC in Odin respectively.</p>
+                    <p>Make sure each file goes in the correct slot in Odin.</p>
+                    <div class="step-image">
+                        <i class="fas fa-folder-open"></i>
+                        <p>Image: Odin with Files Loaded</p>
+                        <p style="font-size: 0.8rem;">Replace with actual image URL</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-header">
+                    <span class="step-number">6</span>
+                    <span class="step-title">Flash Firmware</span>
+                </div>
+                <div class="step-content">
+                    <p>Lastly click flash and wait until its done.</p>
+                    <p>Do not disconnect the device during the process.</p>
+                    <div class="step-image">
+                        <i class="fas fa-bolt"></i>
+                        <p>Image: Odin Flashing Process</p>
+                        <p style="font-size: 0.8rem;">Replace with actual image URL</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="warning">
+                <i class="fas fa-info-circle"></i>
+                <strong>Note:</strong> After successful flash, your device will reboot with Android 14 and FRP should be bypassed.
+            </div>
+            
+            <center>
+                <a href="index.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Unlock Service
+                </a>
+            </center>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 Shadow Global Unlocker. All rights reserved.</p>
+            <p>Professional Samsung FRP Bypass Services</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add functionality for download links
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadLinks = document.querySelectorAll('.download-link');
+            downloadLinks.forEach(link => {
+                if (link.getAttribute('href') === '#') {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert('Odin download would start here. For now, you can download it from trusted sources online.');
+                    });
+                }
+            });
+            
+            // Video placeholder click handler
+            const videoPlaceholder = document.querySelector('.video-placeholder');
+            videoPlaceholder.addEventListener('click', function() {
+                alert('In production, this would play the video tutorial. Replace this placeholder with your YouTube/Vimeo embed code.');
+            });
+        });
+    </script>
+</body>
+</html>
