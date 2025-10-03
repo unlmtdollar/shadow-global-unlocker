@@ -1,1 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Global Unlocker - Samsung FRP Bypass</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1428a0;
+            --secondary: #00a9e0;
+            --accent: #ff6b00;
+            --dark: #0a0f3d;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 60px;
+            width: auto;
+            animation: pulse 2s infinite;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .form-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .info-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            margin: 20px 0 10px;
+            color: var(--accent);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.3);
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 2px rgba(0,169,224,0.3);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .radio-option input {
+            width: auto;
+        }
+        
+        .price-display {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            border: 1px solid var(--secondary);
+        }
+        
+        .price-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .payment-section {
+            margin: 20px 0;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .payment-option {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            background: rgba(0,0,0,0.5);
+            transform: translateY(-3px);
+        }
+        
+        .payment-option.selected {
+            border-color: var(--accent);
+            background: rgba(255,107,0,0.1);
+        }
+        
+        .payment-logo {
+            height: 40px;
+            width: auto;
+            margin-bottom: 10px;
+            object-fit: contain;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .payment-details {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .payment-number {
+            font-family: monospace;
+            font-size: 1.1rem;
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copy-btn {
+            background: var(--secondary);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .file-upload {
+            border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--secondary);
+        }
+        
+        .file-upload i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .instructions {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .instructions a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .instructions a:hover {
+            text-decoration: underline;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            margin: 20px 0;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list i {
+            color: var(--accent);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: var(--secondary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .imei-info {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 5px;
+        }
+        
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid var(--success);
+            color: #b8f7c4;
+        }
+        
+        .alert-info {
+            background: rgba(0, 169, 224, 0.2);
+            border: 1px solid var(--secondary);
+            color: #a6e8ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="Shadow Global Unlocker" class="logo-img">
+                <div>
+                    <div class="logo-text">Shadow Global Unlocker</div>
+                    <div class="tagline">Professional Samsung FRP Bypass Services</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="form-container">
+                <h1>Samsung FRP Unlock Service</h1>
+                <p>Fill in your details to unlock your Samsung device</p>
+                
+                <form id="unlockForm">
+                    <div class="form-group">
+                        <label for="name">What do you want to be called?</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imei">Device IMEI Number</label>
+                        <input type="text" id="imei" placeholder="Enter 15-digit IMEI number" required maxlength="15">
+                        <div class="imei-info">Find IMEI by dialing *#06# on your phone.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select id="country" required>
+                            <option value="">Select your country</option>
+                            <!-- Countries will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Are you a:</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="repairer" name="userType" value="repairer" checked>
+                                <label for="repairer">Phone Repairer</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="customer" name="userType" value="customer">
+                                <label for="customer">Customer</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="price-display hidden" id="priceDisplay">
+                        <div>Total Amount:</div>
+                        <div class="price-amount" id="priceAmount"></div>
+                        <div id="priceNote"></div>
+                    </div>
+                    
+                    <div class="payment-section hidden" id="paymentSection">
+                        <div class="form-group">
+                            <label>Select Payment Method:</label>
+                            <div class="payment-options">
+                                <div class="payment-option" data-method="mpesa">
+                                    <img src="mpesa.png" alt="M-Pesa" class="payment-logo">
+                                    <div>M-Pesa</div>
+                                </div>
+                                <div class="payment-option" data-method="airtel">
+                                    <img src="airtel.png" alt="Airtel Money" class="payment-logo">
+                                    <div>Airtel Money</div>
+                                </div>
+                                <div class="payment-option" data-method="evc">
+                                    <img src="evc.png" alt="EVC Plus" class="payment-logo">
+                                    <div>EVC Plus</div>
+                                </div>
+                                <div class="payment-option" data-method="usdt-binance">
+                                    <img src="bnb.png" alt="Binance" class="payment-logo">
+                                    <div>USDT (Binance UID)</div>
+                                </div>
+                                <div class="payment-option" data-method="usdt-bep20">
+                                    <img src="usdt.png" alt="BEP20" class="payment-logo">
+                                    <div>USDT (BEP20)</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-details hidden" id="mpesaDetails">
+                            <h3>M-Pesa Payment Instructions</h3>
+                            <p>Send payment to one of these numbers:</p>
+                            <div class="payment-number">
+                                <span>0712 345 678</span>
+                                <button class="copy-btn" data-number="0712345678">Copy</button>
+                            </div>
+                            <div class="payment-number">
+                                <span>0745 678 901</span>
+                                <button class="copy-btn" data-number="0745678901">Copy</button>
+                            </div>
+                            <p class="alert alert-info">After payment, upload the transaction screenshot below</p>
+                        </div>
+                        
+                        <div class="payment-details hidden" id="airtelDetails">
+                            <h3>Airtel Money Payment Instructions</h3>
+                            <p>Send payment to this number:</p>
+                            <div class="payment-number">
+                                <span>0733 456 789</span>
+                                <button class="copy-btn" data-number="0733456789">Copy</button>
+                            </div>
+                            <p class="alert alert-info">After payment, upload the transaction screenshot below</p>
+                        </div>
+                        
+                        <div class="payment-details hidden" id="evcDetails">
+                            <h3>EVC Plus Payment Instructions</h3>
+                            <p>Send payment to this number:</p>
+                            <div class="payment-number">
+                                <span>+252 61 234 5678</span>
+                                <button class="copy-btn" data-number="+252612345678">Copy</button>
+                            </div>
+                            <p class="alert alert-info">After payment, upload the transaction screenshot below</p>
+                        </div>
+                        
+                        <div class="payment-details hidden" id="usdtBinanceDetails">
+                            <h3>USDT (Binance UID) Payment Instructions</h3>
+                            <p>Send USDT to this Binance UID:</p>
+                            <div class="payment-number">
+                                <span>89123456</span>
+                                <button class="copy-btn" data-number="89123456">Copy</button>
+                            </div>
+                            <p class="alert alert-info">After payment, upload the transaction screenshot below</p>
+                        </div>
+                        
+                        <div class="payment-details hidden" id="usdtBep20Details">
+                            <h3>USDT (BEP20) Payment Instructions</h3>
+                            <p>Send USDT to this BEP20 address:</p>
+                            <div class="payment-number">
+                                <span>0x8a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b</span>
+                                <button class="copy-btn" data-number="0x8a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b">Copy</button>
+                            </div>
+                            <p class="alert alert-info">After payment, upload the transaction screenshot below</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="paymentDetails" id="paymentDetailsLabel">Transaction Details</label>
+                            <input type="text" id="paymentDetails" placeholder="Enter transaction ID/Reference" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload Payment Proof (Screenshot)</label>
+                            <div class="file-upload" id="fileUploadArea">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Click to upload payment screenshot</p>
+                                <input type="file" id="paymentProof" accept="image/*" hidden>
+                            </div>
+                            <div id="fileName"></div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="submitBtn">
+                        <span id="submitText">Submit Unlock Request</span>
+                        <span id="submitLoading" class="hidden"><span class="loading"></span> Processing...</span>
+                    </button>
+                </form>
+                
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> Need help downgrading to Android 14?</h3>
+                    <p>Check our detailed instructions for downgrading your Samsung device to Android 14 for FRP bypass:</p>
+                    <a href="https://example.com/samsung-downgrade-android14" target="_blank">View Downgrade Instructions</a>
+                </div>
+            </div>
+            
+            <div class="info-container">
+                <h2>Why Choose Shadow Global Unlocker?</h2>
+                
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> 100% Success Rate on Samsung Devices</li>
+                    <li><i class="fas fa-check-circle"></i> Fast Service - Typically 1-2 Hours</li>
+                    <li><i class="fas fa-check-circle"></i> Support for All Samsung Models</li>
+                    <li><i class="fas fa-check-circle"></i> Secure & Confidential</li>
+                    <li><i class="fas fa-check-circle"></i> 24/7 Customer Support</li>
+                </ul>
+                
+                <h3>How It Works</h3>
+                <ol style="padding-left: 20px; margin-bottom: 20px;">
+                    <li style="margin-bottom: 10px;">Fill out the form with your details</li>
+                    <li style="margin-bottom: 10px;">Make payment using your preferred method</li>
+                    <li style="margin-bottom: 10px;">Upload payment proof screenshot</li>
+                    <li style="margin-bottom: 10px;">We'll contact you with unlock instructions</li>
+                    <li>Your device will be unlocked within hours</li>
+                </ol>
+                
+                <div class="alert alert-success">
+                    <strong>Note:</strong> After payment, you'll receive unlock instructions via email or WhatsApp within 1-2 hours.
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 Shadow Global Unlocker. All rights reserved.</p>
+            <p>Contact: support@shadowglobalunlocker.com | +254 700 123 456</p>
+        </footer>
+    </div>
 
+    <script>
+        // DOM Elements
+        const countrySelect = document.getElementById('country');
+        const userTypeRadios = document.querySelectorAll('input[name="userType"]');
+        const priceDisplay = document.getElementById('priceDisplay');
+        const priceAmount = document.getElementById('priceAmount');
+        const priceNote = document.getElementById('priceNote');
+        const paymentSection = document.getElementById('paymentSection');
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        const paymentDetailsInput = document.getElementById('paymentDetails');
+        const paymentDetailsLabel = document.getElementById('paymentDetailsLabel');
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const paymentProof = document.getElementById('paymentProof');
+        const fileName = document.getElementById('fileName');
+        const unlockForm = document.getElementById('unlockForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const submitLoading = document.getElementById('submitLoading');
+        const imeiInput = document.getElementById('imei');
+        
+        // Payment details sections
+        const mpesaDetails = document.getElementById('mpesaDetails');
+        const airtelDetails = document.getElementById('airtelDetails');
+        const evcDetails = document.getElementById('evcDetails');
+        const usdtBinanceDetails = document.getElementById('usdtBinanceDetails');
+        const usdtBep20Details = document.getElementById('usdtBep20Details');
+        
+        // Prices
+        const REPAIRER_PRICE_KSH = 4700;
+        const CUSTOMER_PRICE_KSH = 5300;
+        const REPAIRER_PRICE_USDT = 36.39; // 4700 KSH at current rate
+        const CUSTOMER_PRICE_USDT = 41.04; // 5300 KSH at current rate
+        
+        // Current price and selected payment method
+        let currentPriceKSH = REPAIRER_PRICE_KSH;
+        let currentPriceUSDT = REPAIRER_PRICE_USDT;
+        let selectedPaymentMethod = '';
+        
+        // Telegram Bot Configuration
+        const BOT_TOKEN = '8381533906:AAETGi5VVIOjoVSqXo2qqbNYnlLm48I2eRA';
+        const CHAT_ID = '5952407902';
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Populate countries
+            populateCountries();
+            
+            // Set up event listeners
+            setupEventListeners();
+        });
+        
+        function populateCountries() {
+            const countries = [
+                "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", 
+                "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", 
+                "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", 
+                "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad", 
+                "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", 
+                "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", 
+                "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", 
+                "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", 
+                "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", 
+                "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kosovo", "Kuwait", "Kyrgyzstan", 
+                "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", 
+                "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", 
+                "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", 
+                "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", 
+                "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", 
+                "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", 
+                "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", 
+                "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", 
+                "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", 
+                "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", 
+                "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", 
+                "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+            ];
+            
+            countries.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country;
+                option.textContent = country;
+                countrySelect.appendChild(option);
+            });
+        }
+        
+        function setupEventListeners() {
+            // Country change
+            countrySelect.addEventListener('change', handleCountryChange);
+            
+            // User type change
+            userTypeRadios.forEach(radio => {
+                radio.addEventListener('change', handleUserTypeChange);
+            });
+            
+            // Payment option selection
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectPaymentMethod(this.dataset.method);
+                });
+            });
+            
+            // File upload
+            fileUploadArea.addEventListener('click', function() {
+                paymentProof.click();
+            });
+            
+            paymentProof.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    fileName.textContent = `Selected: ${this.files[0].name}`;
+                }
+            });
+            
+            // IMEI validation
+            imeiInput.addEventListener('input', function() {
+                // Remove any non-digit characters
+                this.value = this.value.replace(/\D/g, '');
+                
+                // Limit to 15 digits
+                if (this.value.length > 15) {
+                    this.value = this.value.substring(0, 15);
+                }
+            });
+            
+            // Copy button functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('copy-btn')) {
+                    const number = e.target.getAttribute('data-number');
+                    navigator.clipboard.writeText(number).then(function() {
+                        const originalText = e.target.textContent;
+                        e.target.textContent = 'Copied!';
+                        setTimeout(() => {
+                            e.target.textContent = originalText;
+                        }, 2000);
+                    });
+                }
+            });
+            
+            // Form submission
+            unlockForm.addEventListener('submit', handleFormSubmit);
+        }
+        
+        function handleCountryChange() {
+            const country = countrySelect.value;
+            
+            if (country) {
+                // Show price and payment section
+                priceDisplay.classList.remove('hidden');
+                paymentSection.classList.remove('hidden');
+                
+                // Update price based on country
+                updatePriceDisplay(country);
+                
+                // Update payment options based on country
+                updatePaymentOptions(country);
+            } else {
+                priceDisplay.classList.add('hidden');
+                paymentSection.classList.add('hidden');
+            }
+        }
+        
+        function handleUserTypeChange() {
+            const userType = document.querySelector('input[name="userType"]:checked').value;
+            const country = countrySelect.value;
+            
+            if (userType === 'repairer') {
+                currentPriceKSH = REPAIRER_PRICE_KSH;
+                currentPriceUSDT = REPAIRER_PRICE_USDT;
+            } else {
+                currentPriceKSH = CUSTOMER_PRICE_KSH;
+                currentPriceUSDT = CUSTOMER_PRICE_USDT;
+            }
+            
+            if (country) {
+                updatePriceDisplay(country);
+            }
+        }
+        
+        function updatePriceDisplay(country) {
+            if (country === 'Kenya') {
+                priceAmount.textContent = `${currentPriceKSH} KSH`;
+                priceNote.textContent = `(Approximately ${currentPriceUSDT} USDT)`;
+            } else {
+                priceAmount.textContent = `${currentPriceUSDT} USDT`;
+                priceNote.textContent = '';
+            }
+        }
+        
+        function updatePaymentOptions(country) {
+            // Reset all payment options
+            paymentOptions.forEach(option => {
+                option.classList.remove('hidden');
+            });
+            
+            // Hide/show options based on country
+            if (country === 'Kenya') {
+                document.querySelector('.payment-option[data-method="evc"]').classList.add('hidden');
+            } else if (country === 'Somalia') {
+                document.querySelector('.payment-option[data-method="mpesa"]').classList.add('hidden');
+                document.querySelector('.payment-option[data-method="airtel"]').classList.add('hidden');
+            } else {
+                document.querySelector('.payment-option[data-method="mpesa"]').classList.add('hidden');
+                document.querySelector('.payment-option[data-method="airtel"]').classList.add('hidden');
+                document.querySelector('.payment-option[data-method="evc"]').classList.add('hidden');
+            }
+            
+            // Clear selected payment method if it's now hidden
+            if (selectedPaymentMethod) {
+                const selectedOption = document.querySelector(`.payment-option[data-method="${selectedPaymentMethod}"]`);
+                if (selectedOption.classList.contains('hidden')) {
+                    selectedPaymentMethod = '';
+                    paymentDetailsInput.value = '';
+                    hideAllPaymentDetails();
+                }
+            }
+        }
+        
+        function selectPaymentMethod(method) {
+            // Deselect all
+            paymentOptions.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Select the clicked one
+            const selectedOption = document.querySelector(`.payment-option[data-method="${method}"]`);
+            if (!selectedOption.classList.contains('hidden')) {
+                selectedOption.classList.add('selected');
+                selectedPaymentMethod = method;
+                showPaymentDetails(method);
+                updatePaymentDetailsPlaceholder(method);
+            }
+        }
+        
+        function showPaymentDetails(method) {
+            // Hide all payment details first
+            hideAllPaymentDetails();
+            
+            // Show the selected one
+            switch(method) {
+                case 'mpesa':
+                    mpesaDetails.classList.remove('hidden');
+                    break;
+                case 'airtel':
+                    airtelDetails.classList.remove('hidden');
+                    break;
+                case 'evc':
+                    evcDetails.classList.remove('hidden');
+                    break;
+                case 'usdt-binance':
+                    usdtBinanceDetails.classList.remove('hidden');
+                    break;
+                case 'usdt-bep20':
+                    usdtBep20Details.classList.remove('hidden');
+                    break;
+            }
+        }
+        
+        function hideAllPaymentDetails() {
+            mpesaDetails.classList.add('hidden');
+            airtelDetails.classList.add('hidden');
+            evcDetails.classList.add('hidden');
+            usdtBinanceDetails.classList.add('hidden');
+            usdtBep20Details.classList.add('hidden');
+        }
+        
+        function updatePaymentDetailsPlaceholder(method) {
+            switch(method) {
+                case 'mpesa':
+                    paymentDetailsLabel.textContent = 'M-Pesa Transaction Code';
+                    paymentDetailsInput.placeholder = 'Enter M-Pesa transaction code (e.g., ODR4X9A1B2)';
+                    break;
+                case 'airtel':
+                    paymentDetailsLabel.textContent = 'Airtel Money Transaction ID';
+                    paymentDetailsInput.placeholder = 'Enter Airtel Money transaction ID';
+                    break;
+                case 'evc':
+                    paymentDetailsLabel.textContent = 'EVC Plus Transaction ID';
+                    paymentDetailsInput.placeholder = 'Enter EVC Plus transaction ID';
+                    break;
+                case 'usdt-binance':
+                    paymentDetailsLabel.textContent = 'Binance Transaction Hash';
+                    paymentDetailsInput.placeholder = 'Enter Binance transaction hash';
+                    break;
+                case 'usdt-bep20':
+                    paymentDetailsLabel.textContent = 'BEP20 Transaction Hash';
+                    paymentDetailsInput.placeholder = 'Enter BEP20 transaction hash';
+                    break;
+            }
+        }
+        
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            // Validate form
+            if (!validateForm()) {
+                return;
+            }
+            
+            // Show loading state
+            submitText.classList.add('hidden');
+            submitLoading.classList.remove('hidden');
+            submitBtn.disabled = true;
+            
+            // Send data to Telegram bot
+            sendToTelegram();
+        }
+        
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const imei = imeiInput.value.trim();
+            const country = countrySelect.value;
+            const paymentDetails = paymentDetailsInput.value.trim();
+            const file = paymentProof.files[0];
+            
+            if (!name) {
+                alert('Please enter your name');
+                return false;
+            }
+            
+            if (!imei) {
+                alert('Please enter your device IMEI');
+                return false;
+            }
+            
+            if (imei.length !== 15) {
+                alert('IMEI must be exactly 15 digits');
+                return false;
+            }
+            
+            if (!country) {
+                alert('Please select your country');
+                return false;
+            }
+            
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method');
+                return false;
+            }
+            
+            if (!paymentDetails) {
+                alert('Please enter transaction details');
+                return false;
+            }
+            
+            if (!file) {
+                alert('Please upload a payment proof screenshot');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function sendToTelegram() {
+            const formData = new FormData();
+            
+            // Add form data
+            formData.append('name', document.getElementById('name').value);
+            formData.append('imei', imeiInput.value);
+            formData.append('country', countrySelect.value);
+            formData.append('userType', document.querySelector('input[name="userType"]:checked').value);
+            formData.append('paymentMethod', selectedPaymentMethod);
+            formData.append('paymentDetails', paymentDetailsInput.value);
+            
+            // Add file
+            formData.append('paymentProof', paymentProof.files[0]);
+            
+            // Send to Telegram bot
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: `New FRP Unlock Request:\n\nName: ${document.getElementById('name').value}\nIMEI: ${imeiInput.value}\nCountry: ${countrySelect.value}\nUser Type: ${document.querySelector('input[name="userType"]:checked').value}\nPayment Method: ${selectedPaymentMethod}\nPayment Details: ${paymentDetailsInput.value}`
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    // Success - show confirmation
+                    alert('Your unlock request has been submitted successfully! We will contact you shortly with further instructions.');
+                    
+                    // Reset form
+                    unlockForm.reset();
+                    selectedPaymentMethod = '';
+                    paymentOptions.forEach(option => {
+                        option.classList.remove('selected');
+                    });
+                    fileName.textContent = '';
+                    hideAllPaymentDetails();
+                    priceDisplay.classList.add('hidden');
+                    paymentSection.classList.add('hidden');
+                } else {
+                    throw new Error('Telegram API error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your request. Please try again or contact support directly.');
+            })
+            .finally(() => {
+                // Reset button state
+                submitText.classList.remove('hidden');
+                submitLoading.classList.add('hidden');
+                submitBtn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
